@@ -4,6 +4,7 @@ import express from 'express'
 import statusRouter from "./routes/status.router.js";
 import authRouter from "./routes/auth.router.js";
 import missionRouter from "./routes/mission.router.js";
+import taskRouter from "./routes/task.router.js";
 
 
 connectMongoDB()
@@ -22,6 +23,7 @@ Cualquier consulta sobre /api/status va a delegarse al statusRouter
 app.use('/api/status', statusRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/missions', missionRouter)
+app.use('/api/task', taskRouter)
 
 
 /* 

@@ -28,9 +28,6 @@ Cada tarea debe contar con los siguientes campos (definidos en `src/models/task.
 - `created_at`: Fecha de creación automática.
 - `finish_date`: Fecha de finalización (solo si el status es COMPLETED).
 
-> [!TIP]
-> Observar que el repositorio actual tiene algunas inconsistencias con el modelo (como el campo `title`) que deberán ser corregidas durante el desarrollo.
-
 ## Consigna: Endpoints a Desarrollar
 ### 0. Autenticación (Ya implementada)
 El sistema ya cuenta con un módulo de autenticación básica localizado en `src/routes/auth.router.js`:
@@ -39,17 +36,17 @@ El sistema ya cuenta con un módulo de autenticación básica localizado en `src
 ### 1. Gestión de Misiones (Relación Usuario -> Misión)
 - **POST `/api/missions/:user_id`**: Crear una misión asignada a un usuario.
 - **GET `/api/missions/:user_id`**: Listar todas las misiones que pertenecen a un usuario específico.
-- **DELETE `/api/missions/:mission_id`**: Eliminar una misión (debería considerar qué pasa con sus tareas).
+- **DELETE `/api/missions/:user_id/:mission_id`**: Eliminar una misión (debería considerar qué pasa con sus tareas).
 
 ### 2. Gestión de Tareas (Relación Misión -> Tarea)
-- **POST `/api/tasks/:mission_id`**: Crear una tarea dentro de una misión.
-- **GET `/api/tasks/:mission_id`**: Listar todas las tareas de una misión particular.
-- **GET `/api/tasks/detail/:task_id`**: Obtener el detalle de una única tarea.
-- **PUT `/api/tasks/:task_id`**: Editar descripción, dificultad o tiempo de una tarea.
-- **DELETE `/api/tasks/:task_id`**: Eliminar una tarea individual.
+- **POST `/api/tasks/:user_id/:mission_id`**: Crear una tarea dentro de una misión.
+- **GET `/api/tasks/:user_id/:mission_id`**: Listar todas las tareas de una misión particular.
+- **GET `/api/tasks/:user_id/detail/:task_id`**: Obtener el detalle de una única tarea.
+- **PUT `/api/tasks/:user_id/:task_id`**: Editar descripción, dificultad o tiempo de una tarea.
+- **DELETE `/api/tasks/:user_id/:task_id`**: Eliminar una tarea individual.
 
 ### 3. Lógica de Negocio y Estados
-- **PATCH `/api/tasks/:task_id/status`**: Cambiar el estado de la tarea (PENDING, IN_PROGRESS, COMPLETED).
+- **PATCH `/api/tasks/:user_id/:task_id/status`**: Cambiar el estado de la tarea (PENDING, IN_PROGRESS, COMPLETED).
     - Al pasar a `COMPLETED`, el sistema debe asignar automáticamente la fecha actual a `finish_date`.
     - Validar que el estado sea un valor permitido.
 
